@@ -8,12 +8,6 @@ class MenuCreater
     @options.merge!(class_and_title)
   end
 
-  def keylist
-    @options.each do |k,v|
-      puts v
-    end
-  end
-
   def welcome_sequence
     puts "You are now using Fancy Count, perfect for your fancy counting needs."
     menu_options
@@ -22,12 +16,12 @@ class MenuCreater
 
   def menu_options
     puts "Please choose from one of the following counter options:"
-    keylist
+    puts @options.values
   end
 
   def selection
     @user_choice = gets.chomp.to_s
-    if @options.include?(@user_choice.capitalize)
+    if @options.value?(@user_choice.capitalize)
       puts "Your selection was found in the list, but isn't finished being developed."
     else
       puts "Your selection was not understood."
@@ -64,6 +58,9 @@ class MooseKounter < Kounter
   attr_accessor :moose
   def post_initialize(args={})
     @moose = "Moose"
+  end
+  def count
+    (1..10).each {|n| puts n.to_s + " Moose!"}
   end
 end
 menu.merger("MooseKounter" => "Moose Counter")

@@ -3,8 +3,16 @@ class MenuCreater
   def initialize
     @options = {}
   end
-  def append(newoption)
-    @options.merge(newoption)
+  def merger(class_and_title)
+    @options.merge!(class_and_title)
+  end
+  def 
+  def welcome_sequence
+    puts "You are now using Fancy Count, perfect for your fancy counting needs."
+  end
+  def menu_options
+    puts "Please choose from one of the following counter options:"
+    puts @options
   end
 end
 menu = MenuCreater.new
@@ -29,14 +37,8 @@ class Multiplier < Kounter
   def post_initialize(args={})
     @multiplier = args[:multiplier]
   end
-  def menu_key
-    :multiplier
-  end
-  def menu_value
-    "Multiplier"
-  end
 end
-menu.append(multiplier: "Multiplier")
+menu.merger("Multiplier" => "Multiplier")
 
 
 class MooseKounter < Kounter
@@ -51,7 +53,7 @@ class MooseKounter < Kounter
     "Moose Counter"
   end
 end
-menu.append(moosekounter: "Moose Counter")
+menu.merger("MooseKounter" => "Moose Counter")
 
 
 class Addifier < Kounter
@@ -73,4 +75,4 @@ class InputEngine
   end
 end
 prompter = InputEngine.new(menu.options)
-prompter.menu_options
+menu.menu_options

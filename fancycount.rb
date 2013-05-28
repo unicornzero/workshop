@@ -6,13 +6,17 @@ class MenuCreater
   def merger(class_and_title)
     @options.merge!(class_and_title)
   end
-  def 
+  def keylist
+    @options.each do |k,v|
+      puts v
+    end
+  end
   def welcome_sequence
     puts "You are now using Fancy Count, perfect for your fancy counting needs."
   end
   def menu_options
     puts "Please choose from one of the following counter options:"
-    puts @options
+    keylist
   end
 end
 menu = MenuCreater.new
@@ -46,33 +50,12 @@ class MooseKounter < Kounter
   def post_initialize(args={})
     @moose = "Moose"
   end
-  def menu_key
-    :moosekounter
-  end
-  def menu_value
-    "Moose Counter"
-  end
 end
 menu.merger("MooseKounter" => "Moose Counter")
 
 
 class Addifier < Kounter
 end
+menu.merger("Addifier" => "Addifier")
 
-class InputEngine
-  attr_accessor :menu
-  def initialize(menu)
-    @menu = menu
-  end
-
-  def welcome_sequence
-    puts "You are now using Fancy Count, perfect for your fancy counting needs."
-  end
-
-  def menu_options
-    puts "Please choose from one of the following counter options:"
-    puts menu
-  end
-end
-prompter = InputEngine.new(menu.options)
 menu.menu_options

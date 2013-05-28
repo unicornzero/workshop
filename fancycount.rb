@@ -9,9 +9,10 @@ class MenuCreater
   end
 
   def welcome_sequence
-    puts "You are now using Fancy Count, perfect for your fancy counting needs."
+    puts "---------------"
     menu_options
     selection
+    playagain?
   end
 
   def menu_options
@@ -21,6 +22,7 @@ class MenuCreater
 
   def selection
     @user_choice = gets.chomp.capitalize
+    puts ""
     if @options.value?(@user_choice)
       if @user_choice == "Moose"
         puts "You selected the Moose counter!"
@@ -58,6 +60,17 @@ class MenuCreater
       puts "Your selection was not understood."
     end
   end
+
+  def playagain?
+    puts "#{PLAYER}, would you like to play again?"
+    affirmative = ["Yes", "Y", "yes", "y"]
+    answer = gets.chomp
+    if affirmative.include?(answer)
+      welcome_sequence 
+    else
+      puts "Goodbye, #{PLAYER}!"
+    end
+  end
 end
 menu = MenuCreater.new
 
@@ -85,6 +98,7 @@ class Multiplier < Kounter
     (1..10).each do |n| 
       puts "#{n}.  #{ n * @multiplier.to_f}"
     end
+    thanker
   end
 end
 menu.merger("Multiplier" => "Multiplier")
@@ -97,6 +111,7 @@ class Moose < Kounter
   end
   def count
     (1..10).each {|n| puts "  " + n.to_s + " Moose!"}
+    thanker
   end
 end
 menu.merger("Moose" => "Moose")
@@ -113,15 +128,24 @@ class Addifier < Kounter
       @helpcount = n + @helpcount
       puts @helpcount
     end
+    thanker
   end
 end
 menu.merger("Addifier" => "Addifier")
 
-##########
+def thanker
+  puts "Thanks for playing, #{PLAYER}!"
+  puts ""
+end
 
+##########
+puts "You are now using Fancy Count, perfect for your fancy counting needs."
+puts "What is your name?"
+PLAYER = gets.chomp
+puts ""
+puts "Hello, #{PLAYER}"
 menu.welcome_sequence
 
-#Junk Drawer
-# multi.match(/^[-+]?[0-9]*\.?[0-9]+$/)
+
 
 

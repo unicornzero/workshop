@@ -23,9 +23,11 @@ class BottleSong
     num = 1
       puts "#{num} bottle of #{drink} on the wall."
       puts "#{num} bottle of #{drink}."
-      puts "Take one down and pass it around."
-      puts "#{num - 1} bottles of #{drink} on the wall."
+      puts "Take it down and pass it around."
+      puts "No more bottles of #{drink} on the wall."
       puts ""
+      puts "No more bottles of beer on the wall, no more bottles of beer."
+      puts "Go to the store and buy some more, #{@startnum} bottles of beer on the wall."
   end
 
 end

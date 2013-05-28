@@ -25,9 +25,32 @@ class MenuCreater
       if @user_choice == "Moose"
         puts "You selected the Moose counter!"
         puts "Let's count!..."
-        klass = @user_choice.to_sym
         uc = Moose.new
         uc.count
+      elsif @user_choice == "Multiplier"
+        puts "You selected the Multiplier counter!"
+        puts "Select your multiplier. Enter a number:"
+        input = gets.chomp
+        if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
+          puts "Let's count!..."
+          num = input.to_f
+          uc = Multiplier.new(multiplier: num)
+          uc.count
+        else 
+          puts "That was not a valid number."
+        end
+      elsif @user_choice == "Addifier"
+        puts "You selected the Addifier counter!"
+        puts "Select your addifier. Enter a number:"
+        input = gets.chomp
+        if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
+          puts "Let's count!..."
+          num = input.to_f
+          uc = Addifier.new(magicnum: num)
+          uc.count
+        else 
+          puts "That was not a valid number."
+        end
       else
         puts "Your selection was found in the list, but isn't finished being developed."
       end
@@ -58,6 +81,11 @@ class Multiplier < Kounter
   def post_initialize(args={})
     @multiplier = args[:multiplier]
   end
+  def count
+    (1..10).each do |n| 
+      puts "#{n}.  #{ n * @multiplier.to_f}"
+    end
+  end
 end
 menu.merger("Multiplier" => "Multiplier")
 
@@ -75,11 +103,25 @@ menu.merger("Moose" => "Moose")
 
 
 class Addifier < Kounter
+  attr_accessor :magicnum, :helpcount
+  def post_initialize(args={})
+    @magicnum = args[:magicnum]
+  end
+  def count
+    @helpcount = @magicnum
+    (1..10).each do |n|
+      @helpcount = n + @helpcount
+      puts @helpcount
+    end
+  end
 end
 menu.merger("Addifier" => "Addifier")
 
 ##########
 
 menu.welcome_sequence
+
+#Junk Drawer
+# multi.match(/^[-+]?[0-9]*\.?[0-9]+$/)
 
 

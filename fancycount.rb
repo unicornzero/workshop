@@ -4,8 +4,8 @@ class MenuCreater
     @options = {}
   end
 
-  def merger(class_and_title)
-    @options.merge!(class_and_title)
+  def merger(class_menutitle)
+    @options.merge!(class_menutitle)
   end
 
   def welcome_sequence
@@ -16,13 +16,21 @@ class MenuCreater
 
   def menu_options
     puts "Please choose from one of the following counter options:"
-    puts @options.values
+    @options.values.each {|v| puts "  #{v}"}
   end
 
   def selection
-    @user_choice = gets.chomp.to_s
-    if @options.value?(@user_choice.capitalize)
-      puts "Your selection was found in the list, but isn't finished being developed."
+    @user_choice = gets.chomp.capitalize
+    if @options.value?(@user_choice)
+      if @user_choice == "Moose"
+        puts "You selected the Moose counter!"
+        puts "Let's count!..."
+        klass = @user_choice.to_sym
+        uc = Moose.new
+        uc.count
+      else
+        puts "Your selection was found in the list, but isn't finished being developed."
+      end
     else
       puts "Your selection was not understood."
     end
@@ -54,20 +62,24 @@ end
 menu.merger("Multiplier" => "Multiplier")
 
 
-class MooseKounter < Kounter
+class Moose < Kounter
   attr_accessor :moose
   def post_initialize(args={})
     @moose = "Moose"
   end
   def count
-    (1..10).each {|n| puts n.to_s + " Moose!"}
+    (1..10).each {|n| puts "  " + n.to_s + " Moose!"}
   end
 end
-menu.merger("MooseKounter" => "Moose Counter")
+menu.merger("Moose" => "Moose")
 
 
 class Addifier < Kounter
 end
 menu.merger("Addifier" => "Addifier")
 
+##########
+
 menu.welcome_sequence
+
+

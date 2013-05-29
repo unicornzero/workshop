@@ -11,7 +11,7 @@ class Billy
     case input
     when /^[A-Z][A-Z]+/
       yelled_at
-    when /\?/
+    when /\?$/
       asked_question
     when /\w/
       told_something

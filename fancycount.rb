@@ -26,6 +26,7 @@ class Menu
     @@user_choice = gets.chomp.capitalize
     puts ""
     if @@kounters.include?(@@user_choice)
+      puts "You selected the #{@@user_choice} counter!"
       case @@user_choice 
       when "Moose"
         Moose.countmenu
@@ -40,6 +41,11 @@ class Menu
     end
   end
 
+  def self.countcaller
+    counter = gets.chomp
+    counter.countmenu
+  end
+
   def self.thanker
     puts "Thanks for playing, #{@@player}!"
     puts ""
@@ -47,7 +53,7 @@ class Menu
 
   def self.playagain?
     puts "#{@@player}, would you like to play again?"
-    affirmative = ["Yes", "Y", "yes", "y"]
+    affirmative = ["Yes", "Y", "yes", "y", "YES"]
     answer = gets.chomp
     if affirmative.include?(answer)
       selecter_sequence 
@@ -63,7 +69,6 @@ end
 class Multiplier < Kounter
 
   def self.countmenu
-    puts "You selected the Multiplier counter!"
     puts "Select your multiplier. Enter a number:"
     input = gets.chomp
     if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
@@ -87,7 +92,6 @@ end
 class Moose < Kounter
 
   def self.countmenu
-    puts "You selected the Moose counter!"
     puts "Let's count!..."
     count
   end
@@ -101,7 +105,6 @@ end
 class Addifier < Kounter
 
   def self.countmenu
-    puts "You selected the Addifier counter!"
     puts "Select your addifier. Enter a number:"
     input = gets.chomp
     if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)

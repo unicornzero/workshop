@@ -24,11 +24,12 @@ class MenuCreater
     @user_choice = gets.chomp.capitalize
     puts ""
     if @options.value?(@user_choice)
-      if @user_choice == "Moose"
+      case @user_choice 
+      when "Moose"
         Moose.countmenu
-      elsif @user_choice == "Multiplier"
+      when "Multiplier"
         Multiplier.countmenu
-      elsif @user_choice == "Addifier"
+      when "Addifier"
         puts "You selected the Addifier counter!"
         puts "Select your addifier. Enter a number:"
         input = gets.chomp
@@ -110,7 +111,7 @@ menu.merger("Moose" => "Moose")
 class Addifier < Kounter
   attr_accessor :magicnum, :helpcount
 
-  def post_initialize(args={})
+  def initialize(args={})
     @magicnum = args[:magicnum]
   end
 

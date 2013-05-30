@@ -1,39 +1,32 @@
-class MenuCreater
-  attr_accessor :options, :user_choice, :player
-  def initialize
-    @options = {}
-  end
+class Menu
+  @@kounters = ["Moose", "Multiplier", "Addifier"]
 
-  def merger(class_menutitle)
-    @options.merge!(class_menutitle)
-  end
-
-  def welcome_sequence
+  def self.welcome_sequence
     puts "You are now using Fancy Count, perfect for your fancy counting needs."
     puts "What is your name?"
-    @player = gets.chomp
+    @@player = gets.chomp
     puts ""
-    puts "Hello, #{@player}"
+    puts "Hello, #{@@player}"
     selecter_sequence
   end
 
-  def selecter_sequence
+  def self.selecter_sequence
     puts "---------------"
     menu_options
     selection
     playagain?
   end
 
-  def menu_options
+  def self.menu_options
     puts "Please choose from one of the following counter options:"
-    @options.values.each {|v| puts "  #{v}"}
+    @@kounters.each {|v| puts "  #{v}"}
   end
 
-  def selection
-    @user_choice = gets.chomp.capitalize
+  def self.selection
+    @@user_choice = gets.chomp.capitalize
     puts ""
-    if @options.value?(@user_choice)
-      case @user_choice 
+    if @@kounters.include?(@@user_choice)
+      case @@user_choice 
       when "Moose"
         Moose.countmenu
         thanker
@@ -43,32 +36,28 @@ class MenuCreater
       when "Addifier"
         Addifier.countmenu
         thanker
-      else
-        puts "Your selection was found in the list, but isn't finished being developed."
       end
     else
       puts "Your selection was not understood."
     end
   end
 
-  def thanker
-    puts "Thanks for playing, #{@player}!"
+  def self.thanker
+    puts "Thanks for playing, #{@@player}!"
     puts ""
   end
 
-  def playagain?
-    puts "#{@player}, would you like to play again?"
+  def self.playagain?
+    puts "#{@@player}, would you like to play again?"
     affirmative = ["Yes", "Y", "yes", "y"]
     answer = gets.chomp
     if affirmative.include?(answer)
       selecter_sequence 
     else
-      puts "Goodbye, #{@player}!"
+      puts "Goodbye, #{@@player}!"
     end
   end
 end
-menu = MenuCreater.new
-
 
 class Kounter
 end
@@ -95,7 +84,6 @@ class Multiplier < Kounter
   end
 
 end
-menu.merger("Multiplier" => "Multiplier")
 
 
 class Moose < Kounter
@@ -110,7 +98,6 @@ class Moose < Kounter
     (1..10).each {|n| puts "  " + n.to_s + " Moose!"}
   end
 end
-menu.merger("Moose" => "Moose")
 
 
 class Addifier < Kounter
@@ -136,9 +123,9 @@ class Addifier < Kounter
     end
   end
 end
-menu.merger("Addifier" => "Addifier")
 
-menu.welcome_sequence
+
+Menu.welcome_sequence
 
 
 

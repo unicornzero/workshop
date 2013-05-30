@@ -63,11 +63,11 @@ class Menu
   end
 end
 
+
 class Kounter
 end
 
 class Multiplier < Kounter
-
   def self.countmenu
     puts "Select your multiplier. Enter a number:"
     input = gets.chomp
@@ -85,12 +85,10 @@ class Multiplier < Kounter
       puts "#{n}.  #{ n * multiplier.to_f}"
     end
   end
-
 end
 
 
 class Moose < Kounter
-
   def self.countmenu
     puts "Let's count!..."
     count
@@ -103,21 +101,19 @@ end
 
 
 class Addifier < Kounter
-
   def self.countmenu
     puts "Select your addifier. Enter a number:"
     input = gets.chomp
     if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
       puts "Let's count!..."
-      magicnum = input.to_f
-      self.count(magicnum)
+      self.count(input.to_f)
     else 
       puts "That was not a valid number."
     end
   end
 
-  def self.count(magicnum)
-    helpcount = magicnum
+  def self.count(input)
+    helpcount = input
     (1..10).each do |n|
       helpcount = n + helpcount
       puts helpcount

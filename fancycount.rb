@@ -30,17 +30,7 @@ class MenuCreater
       when "Multiplier"
         Multiplier.countmenu
       when "Addifier"
-        puts "You selected the Addifier counter!"
-        puts "Select your addifier. Enter a number:"
-        input = gets.chomp
-        if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
-          puts "Let's count!..."
-          num = input.to_f
-          uc = Addifier.new(magicnum: num)
-          uc.count
-        else 
-          puts "That was not a valid number."
-        end
+        Addifier.countmenu
       else
         puts "Your selection was found in the list, but isn't finished being developed."
       end
@@ -109,17 +99,25 @@ menu.merger("Moose" => "Moose")
 
 
 class Addifier < Kounter
-  attr_accessor :magicnum, :helpcount
 
-  def initialize(args={})
-    @magicnum = args[:magicnum]
+  def self.countmenu
+    puts "You selected the Addifier counter!"
+    puts "Select your addifier. Enter a number:"
+    input = gets.chomp
+    if input.match(/^[-+]?[0-9]*\.?[0-9]+$/)
+      puts "Let's count!..."
+      magicnum = input.to_f
+      self.count(magicnum)
+    else 
+      puts "That was not a valid number."
+    end
   end
 
-  def count
-    @helpcount = @magicnum
+  def self.count(magicnum)
+    helpcount = magicnum
     (1..10).each do |n|
-      @helpcount = n + @helpcount
-      puts @helpcount
+      helpcount = n + helpcount
+      puts helpcount
     end
     thanker
   end

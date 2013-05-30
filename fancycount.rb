@@ -29,14 +29,12 @@ class Menu
       case @@user_choice 
       when "Moose"
         Moose.countmenu
-        thanker
       when "Multiplier"
         Multiplier.countmenu
-        thanker
       when "Addifier"
         Addifier.countmenu
-        thanker
       end
+      thanker
     else
       puts "Your selection was not understood."
     end

@@ -2,13 +2,11 @@
 
 
 <h3>Tables</h3>
-<table>
+<table cellpadding="3">
   <tr>
     <th>Table number</th>
     <th>Seats</th>
     <th>Status</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -22,8 +20,11 @@
 <% end %>
 </table>
 
+<br>
+<br>
+
 <h3>Orders</h3>
-<table>
+<table cellpadding="3">
   <tr>
     <th>Table Number</th>
     <th>Started At</th>
@@ -36,16 +37,21 @@
   <% @orders.each do |order| %>
   <tr>
     <td><%= order.dining_table_id %></td>
-    <td><%= order.created_at %></td>
-    <td><%= order.updated_at %></td>
-    <td><%= order.total %></td>
-    <td><%= order.status %></td>
-    <td><%= link_to 'View', order_path(order) %></td>
+    <td><%= order.created_at.to_s(:time) %></td>
+    <td><%= order.updated_at.to_s(:time) %></td>
+    <td>$ <%= order.set_total %></td>
+    <td><%= order.status || "No" %></td>
+    <td><%= link_to 'View/Modify', order_path(order) %></td>
   </tr>
   <% end %>
 <% end %>
 </table>
+
+<br />
+<br />
+
 <strong><%= link_to 'New Order', new_order_path %></strong>
+<br />
 
 
 <br />

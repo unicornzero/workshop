@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
 
+
   def index
     @order_items = OrderItem.all
   end
@@ -23,11 +24,12 @@ class OrderItemsController < ApplicationController
   def create
     @order_item = OrderItem.new(params[:order_item])
 
-      if @order_item.save
-        redirect_to orders_path, notice: 'Order item was successfully created.' 
-      else
-        render orders_path
-      end
+    if @order_item.save
+      @order = Order.find(@order_item.order_id)
+#      @order.set_total
+      redirect_to order_path(@order), notice: 'Order item was successfully created.' 
+    else
+      render orders_path
     end
   end
 
@@ -35,14 +37,10 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find(params[:id])
 
-    respond_to do |format|
-      if @order_item.update_attributes(params[:order_item])
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
-      end
+    if @order_item.update_attributes(params[:order_item])
+      redirect_to @order_item, notice: 'Order item was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -51,9 +49,7 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.find(params[:id])
     @order_item.destroy
 
-    respond_to do |format|
-      format.html { redirect_to order_items_url }
-      format.json { head :no_content }
-    end
+    redirect_to order_items_url
   end
+
 end

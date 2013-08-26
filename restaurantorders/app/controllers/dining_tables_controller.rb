@@ -4,10 +4,6 @@ class DiningTablesController < ApplicationController
   def index
     @dining_tables = DiningTable.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @dining_tables }
-    end
     @orders = Order.all
   end
 

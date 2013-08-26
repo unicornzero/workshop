@@ -12,7 +12,7 @@
 
 <p>
   <b>Total:</b>
-  <%= @order.total %>
+  <%= @order.total.to_s %>
 </p>
 
 <p>
@@ -22,7 +22,7 @@
 <br>
 <p>
   <% if @order_items %>
-    <table>
+    <table cellpadding="3">
       <thead>
         <tr>
           <th>Chair #</th>
@@ -30,15 +30,20 @@
           <th>Price</th>
         </tr>
       </thead>
-      <% @order_items.each do |item| %>
         <tbody>
-          <tr>
-            <td><%= item.chair_number %></td>
-            <td><%= Entree.find(item.entree_id).name %></td>
-            <td><%= Entree.find(item.entree_id).price %></td>
-          </tr>
+        <% @order_items.each do |item| %>
+        <tr>
+          <td><%= item.chair_number %></td>
+          <td><%= Entree.find(item.entree_id).name %></td>
+          <td><%= Entree.find(item.entree_id).price %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <th align="right">Total:</th>
+          <td>$<%= @order.total.to_s %></td>
+        </tr>
         </tbody>
-      <% end %>
     </table>
   <% else%>
     Can't find anything in @order_items.

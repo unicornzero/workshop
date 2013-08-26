@@ -2,12 +2,9 @@ Restaurantorders::Application.routes.draw do
   root :to => 'dining_tables#index'
   resources :entrees
 
-
-  resources :order_items
-
-
-  resources :orders
-
+  resources :orders do
+    resources :order_items
+  end
 
   resources :dining_tables
 

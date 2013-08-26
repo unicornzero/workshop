@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Order #:</b>
+  <%= @order.id %>
+</p>
+
+<p>
   <b>Dining table:</b>
   <%= @order.dining_table_id %>
 </p>
@@ -14,7 +19,50 @@
   <b>Status:</b>
   <%= @order.status %>
 </p>
+<br>
+<p>
+  <% if @order_items %>
+    <table>
+      <thead>
+        <tr>
+          <th>Chair #</th>
+          <th>Entree</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <% @order_items.each do |item| %>
+        <tbody>
+          <tr>
+            <td><%= item.chair_number %></td>
+            <td><%= Entree.find(item.entree_id).name %></td>
+            <td><%= Entree.find(item.entree_id).price %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% else%>
+    Can't find anything in @order_items.
+  <% end %>
+</p>
+<br>
 
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= form_tag order_order_items_path(@order) do %>
+  <div class="field">
+    <input id="order_item_order_id" name="order_item[order_id]" value="<%= @order.id %>"  type ="hidden"/>
+  </div>
+  <div class="field">
+    <%= label_tag :chair_number %><br />
+    <%= number_field(:order_item, :chair_number) %>
+  </div>
+  <div class="field">
+    <%= label_tag :entree_id %><br />
+    <% Entree.all.each do |entree| %>
+      <%= radio_button(:order_item, :entree_id, entree.id) %>
+      <%= label_tag "#{entree.id}".to_sym, "#{entree.name} - $#{entree.price}" %>
+      <br>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

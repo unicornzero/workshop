@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @entree.name %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @entree.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_entree_path(@entree) %> |
+<%= link_to 'Back', entrees_path %>

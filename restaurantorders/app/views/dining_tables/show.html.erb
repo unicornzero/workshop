@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Table number:</b>
+  <%= @dining_table.table_number %>
+</p>
+
+<p>
+  <b>Seats:</b>
+  <%= @dining_table.seats %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @dining_table.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_dining_table_path(@dining_table) %> |
+<%= link_to 'Back', dining_tables_path %>

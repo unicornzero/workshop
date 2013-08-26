@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  table_number: 1
+  seats: 1
+  status: MyString
+
+two:
+  table_number: 1
+  seats: 1
+  status: MyString

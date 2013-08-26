@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dining_table_id: 1
+  total: 1.5
+  status: MyString
+
+two:
+  dining_table_id: 1
+  total: 1.5
+  status: MyString

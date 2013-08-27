@@ -14,7 +14,13 @@
   <tr>
     <td><%= dining_table.table_number %></td>
     <td><%= dining_table.seats %></td>
-    <td><%= dining_table.status %></td>
+    <td>
+      <% if dining_table.status == "Full" %>
+        <%= link_to "Full", opener_path(dining_table), method: :post %>
+      <% else %>
+        <%= link_to "Open", opener_path(dining_table), method: :post %>
+      <% end %>
+    </td>
     <td><%= link_to 'Edit', edit_dining_table_path(dining_table) %></td>
   </tr>
 <% end %>

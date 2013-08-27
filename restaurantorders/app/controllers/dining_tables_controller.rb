@@ -77,4 +77,16 @@ class DiningTablesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def opener
+    @dining_table = DiningTable.find(params[:id])
+    if @dining_table.status == "Full"
+      @dining_table.update_attribute(:status, "Open")
+    else
+      @dining_table.update_attribute(:status, "Full")
+    end
+    redirect_to dining_tables_path
+  end
+
 end

@@ -9,6 +9,7 @@ Restaurantorders::Application.routes.draw do
   resources :dining_tables
 
   post 'orders/:id/payit', to: "orders#payit", as: :payit
+  post 'dining_tables/:id/opener', to: "dining_tables#opener", as: :opener
 
 
   # The priority is based upon order of creation:

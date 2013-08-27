@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 
-
   def index
     @orders = Order.all
 
@@ -15,7 +14,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.order_items.any?
       @order_items = @order.order_items
-#      @order.set_total
     end
 
   end
@@ -59,15 +57,10 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-
-    respond_to do |format|
-      if @order.update_attributes(params[:order])
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.update_attributes(params[:order])
+      redirect_to @order, notice: 'Order was successfully updated.' 
+    else
+      render action: "edit" 
     end
   end
 
@@ -82,4 +75,12 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def payit
+    @order = Order.find(params[:id])
+    @order.update_attribute(:status, "Paid")
+    redirect_to @order
+  end
+
+
 end

@@ -14,4 +14,8 @@ class Order < ActiveRecord::Base
       return cost
     end  
   end
+
+  def set_to_paid
+    self.status = "Paid"
+  end
 end

@@ -40,7 +40,12 @@
     <td><%= order.created_at.to_s(:time) %></td>
     <td><%= order.updated_at.to_s(:time) %></td>
     <td>$ <%= order.set_total %></td>
-    <td><%= order.status || "No" %></td>
+    <td> 
+      <% if order.status == "Paid" %>
+        Paid
+      <% else %>  
+        <%= link_to 'Mark as Paid', payit_path(order), method: :post %>
+      <% end %></td>
     <td><%= link_to 'View/Modify', order_path(order) %></td>
   </tr>
   <% end %>

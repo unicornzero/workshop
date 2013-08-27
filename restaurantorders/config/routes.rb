@@ -8,6 +8,8 @@ Restaurantorders::Application.routes.draw do
 
   resources :dining_tables
 
+  post 'orders/:id/payit', to: "orders#payit", as: :payit
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
